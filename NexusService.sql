@@ -30,13 +30,18 @@ create table Customer
 create table Bill
 (
 	Id_Bill int identity primary key,
-	Id_Connection int
+	Id_Product varchar(50),
+	Name_Product varchar(50),
+	Id_Customer varchar(50),
+	[Name] varchar(50),
+	Price money,
+	PriceType varchar(50),
 )
 
 create table Store
 (
 	Id_Store int primary key,
-	Id_Connection int,
+	Id_Product varchar(50),
 	ConnectionType varchar(50),
 	Price money,
 	PriceType varchar(50),
@@ -61,3 +66,18 @@ create table ProductDetails
 	Quantity int,
 	Information varchar(250),
 )
+
+ALTER TABLE Bill
+Add FOREIGN KEY (Id_Product) REFERENCES Product(Id_Product);
+
+ALTER TABLE Bill
+Add FOREIGN KEY (Id_Customer) REFERENCES Customer(Id_Customer);
+
+ALTER TABLE Store
+Add FOREIGN KEY (Id_Product) REFERENCES Product(Id_Product);
+
+ALTER TABLE ProductDetails
+Add FOREIGN KEY (Id_Product) REFERENCES Product(Id_Product);
+
+ALTER TABLE Staff
+ADD FOREIGN KEY (Id_Store) REFERENCES Store(Id_Store);
