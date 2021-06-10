@@ -13,6 +13,7 @@ create table Product
 	ConnectionType varchar(50),
 	Price money,
 	PriceType varchar(50),
+	Assess varchar(250),
 	[status] bit,
 )
 
@@ -21,19 +22,26 @@ create table Customer
 	Id_Customer varchar(50) primary key,
 	[Name] varchar(50),
 	Pass varchar(50),
+	Email varchar(50),
+	Sex varchar(50),
+	Phone varchar(10),
 	[status] bit,
-
 )
 create table Bill
 (
 	Id_Bill int identity primary key,
-	Id_Connection int
+	Id_Product varchar(50),
+	Name_Product varchar(50),
+	Id_Customer varchar(50),
+	[Name] varchar(50),
+	Price money,
+	PriceType varchar(50),
 )
 
 create table Store
 (
-	Id_Store int,
-	Id_Connection int,
+	Id_Store int primary key,
+	Id_Product varchar(50),
 	ConnectionType varchar(50),
 	Price money,
 	PriceType varchar(50),
@@ -41,12 +49,35 @@ create table Store
 )
 create table Staff
 (
-	Id_Staff int,
+	Id_Staff int primary key,
 	[Name] varchar(50),
 	Pass varchar(50),
+	Age int,
+	Sex varchar(50),
 	Id_Store int,
 	[status] bit,
-
 )
 
 create table ProductDetails 
+(
+	Id_Product varchar(50),
+	Name_Product varchar(50),
+	Price money,
+	Quantity int,
+	Information varchar(250),
+)
+
+ALTER TABLE Bill
+Add FOREIGN KEY (Id_Product) REFERENCES Product(Id_Product);
+
+ALTER TABLE Bill
+Add FOREIGN KEY (Id_Customer) REFERENCES Customer(Id_Customer);
+
+ALTER TABLE Store
+Add FOREIGN KEY (Id_Product) REFERENCES Product(Id_Product);
+
+ALTER TABLE ProductDetails
+Add FOREIGN KEY (Id_Product) REFERENCES Product(Id_Product);
+
+ALTER TABLE Staff
+ADD FOREIGN KEY (Id_Store) REFERENCES Store(Id_Store);
