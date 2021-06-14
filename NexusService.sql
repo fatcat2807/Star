@@ -32,7 +32,6 @@ create table Customer
 	[Name] varchar(50),
 	Pass varchar(50),
 	Email varchar(50),
-	Sex varchar(50),
 	Phone varchar(10),
 	[status] bit,
 )
